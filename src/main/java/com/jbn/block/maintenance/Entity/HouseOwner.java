@@ -5,6 +5,7 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
+import java.util.ArrayList;
 import java.util.List;
 
 @NoArgsConstructor
@@ -26,7 +27,7 @@ public class HouseOwner {
     private Integer ownerAge;
 
     @Column(name = "OWNER_DOOR_NO", nullable = false)
-    private Integer ownerDoorNo;
+    private Long ownerDoorNo;
 
     @Column(name = "OWNER_PHONE_NO")
     private String ownerPhoneNo;
@@ -35,6 +36,6 @@ public class HouseOwner {
     private String ownerEmailId;
 
     @OneToMany(mappedBy = "houseOwner")
-    private List<WaterMeterLogs> waterMeterLogs;
+    private List<MonthlyReport> monthlyReports = new ArrayList<>();
 
 }

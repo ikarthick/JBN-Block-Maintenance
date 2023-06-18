@@ -1,7 +1,9 @@
 package com.jbn.block.maintenance.Utility;
 
 import com.jbn.block.maintenance.DTO.HouseOwnerDTO;
+import com.jbn.block.maintenance.DTO.WaterMeterLogsDTO;
 import com.jbn.block.maintenance.Entity.HouseOwner;
+import com.jbn.block.maintenance.Entity.WaterMeterLogs;
 import org.modelmapper.ModelMapper;
 import org.modelmapper.TypeToken;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -25,5 +27,9 @@ public class AppUtil {
 
     public List<HouseOwnerDTO> mapEntityListToDTO(List<HouseOwner> houseOwnerList){
         return modelMapper.map(houseOwnerList, new TypeToken<List<Character>>() {}.getType());
+    }
+
+    public WaterMeterLogs mapDTOToEntity(WaterMeterLogsDTO waterMeterLogsDTO){
+        return modelMapper.map(waterMeterLogsDTO, WaterMeterLogs.class);
     }
 }

@@ -5,8 +5,6 @@ import com.jbn.block.maintenance.Entity.HouseOwner;
 import com.jbn.block.maintenance.Exception.ResourceNotFoundException;
 import com.jbn.block.maintenance.Repository.HouseOwnerRepository;
 import com.jbn.block.maintenance.Utility.AppUtil;
-import org.modelmapper.ModelMapper;
-import org.modelmapper.TypeToken;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -17,6 +15,9 @@ public class HouseOwnerService {
 
     @Autowired
     HouseOwnerRepository houseOwnerRepository;
+
+    @Autowired
+    MaintenanceReportService maintenanceReportService;
 
     @Autowired
     AppUtil appUtil;

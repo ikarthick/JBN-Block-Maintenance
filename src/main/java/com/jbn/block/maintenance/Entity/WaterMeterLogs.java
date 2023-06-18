@@ -3,6 +3,7 @@ package com.jbn.block.maintenance.Entity;
 import lombok.Data;
 
 import javax.persistence.*;
+import java.time.LocalDateTime;
 import java.util.Date;
 
 @Entity
@@ -19,10 +20,21 @@ public class WaterMeterLogs {
     private Integer waterMeterReading;
 
     @Column(name = "WATER_METER_LOG_DATE")
-    private Date waterMeterLogDate;
+    private LocalDateTime waterMeterLogDate;
 
-    @ManyToOne
-    @JoinColumn(name="owner_door_no", referencedColumnName="owner_door_no")
-    private HouseOwner houseOwner;
+    @OneToOne
+    @JoinColumn(name = "MONTHLY_REPORT_ID")
+    private MonthlyReport monthlyReport;
+
+//     Optional convenience methods for maintaining the relationship
+
+    public MonthlyReport getOwner() {
+        return monthlyReport;
+    }
+
+    public void setMonthlyReport(MonthlyReport monthlyReport) {
+        this.monthlyReport = monthlyReport;
+    }
+
 
 }

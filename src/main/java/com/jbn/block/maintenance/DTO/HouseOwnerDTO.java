@@ -9,9 +9,11 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 public class HouseOwnerDTO {
 
-    private long ownerId;
+    private Long ownerId;
     private String ownerFullName;
     private Integer ownerAge;
-    private Integer ownerDoorNo;
+    private Long ownerDoorNo;
+    private String ownerPhoneNo;
+    private String ownerEmailId;
 
 }
