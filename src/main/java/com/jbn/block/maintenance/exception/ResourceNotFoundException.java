@@ -1,4 +1,4 @@
-package com.jbn.block.maintenance.Exception;
+package com.jbn.block.maintenance.exception;
 
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.ResponseStatus;

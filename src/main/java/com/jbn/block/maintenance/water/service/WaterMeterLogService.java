@@ -1,9 +1,9 @@
-package com.jbn.block.maintenance.Service;
+package com.jbn.block.maintenance.water.service;
 
-import com.jbn.block.maintenance.DTO.WaterMeterLogsDTO;
-import com.jbn.block.maintenance.Entity.WaterMeterLogs;
-import com.jbn.block.maintenance.Repository.WaterMeterLogsRepository;
-import com.jbn.block.maintenance.Utility.AppUtil;
+import com.jbn.block.maintenance.water.dto.WaterMeterLogsDTO;
+import com.jbn.block.maintenance.water.entity.WaterMeterLogs;
+import com.jbn.block.maintenance.water.repository.WaterMeterLogsRepository;
+import com.jbn.block.maintenance.common.util.AppUtil;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -21,7 +21,7 @@ public class WaterMeterLogService {
     AppUtil appUtil;
 
     public WaterMeterLogsDTO saveWaterLog(WaterMeterLogsDTO waterMeterLogsDTO){
-        waterMeterLogsDTO.setWaterMeterLogDate(LocalDateTime.now());
+        waterMeterLogsDTO.setRecordDate(LocalDateTime.now());
         WaterMeterLogs waterMeterLogsEntity = appUtil.mapDTOToEntity(waterMeterLogsDTO);
         waterMeterLogsRepository.save(waterMeterLogsEntity);
         log.info("Water Meter Log Updated");

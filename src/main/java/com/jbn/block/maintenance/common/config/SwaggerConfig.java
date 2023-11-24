@@ -1,4 +1,4 @@
-package com.jbn.block.maintenance.Config;
+package com.jbn.block.maintenance.common.config;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import springfox.documentation.builders.PathSelectors;

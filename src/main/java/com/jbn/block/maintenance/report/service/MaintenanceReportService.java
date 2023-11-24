@@ -1,8 +1,8 @@
-package com.jbn.block.maintenance.Service;
+package com.jbn.block.maintenance.report.service;
 
 
-import com.jbn.block.maintenance.Repository.WaterMeterLogsRepository;
-import com.jbn.block.maintenance.Utility.AppUtil;
+import com.jbn.block.maintenance.water.repository.WaterMeterLogsRepository;
+import com.jbn.block.maintenance.common.util.AppUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
