@@ -1,4 +1,4 @@
-package com.jbn.block.maintenance.residence.entity;
+package com.jbn.block.maintenance.residence.details.entity;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;

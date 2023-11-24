@@ -1,4 +1,4 @@
-package com.jbn.block.maintenance.residence.dto;
+package com.jbn.block.maintenance.residence.details.dto;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;

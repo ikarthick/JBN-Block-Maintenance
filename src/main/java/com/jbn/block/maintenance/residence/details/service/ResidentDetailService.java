@@ -1,9 +1,9 @@
-package com.jbn.block.maintenance.residence.service;
+package com.jbn.block.maintenance.residence.details.service;
 
-import com.jbn.block.maintenance.residence.dto.ResidentDetailDto;
-import com.jbn.block.maintenance.residence.entity.ResidentDetail;
+import com.jbn.block.maintenance.residence.details.dto.ResidentDetailDto;
+import com.jbn.block.maintenance.residence.details.entity.ResidentDetail;
 import com.jbn.block.maintenance.exception.ResourceNotFoundException;
-import com.jbn.block.maintenance.residence.repository.ResidentDetailRepository;
+import com.jbn.block.maintenance.residence.details.repository.ResidentDetailRepository;
 import com.jbn.block.maintenance.common.util.AppUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;

@@ -1,8 +1,8 @@
 package com.jbn.block.maintenance.common.util;
 
-import com.jbn.block.maintenance.residence.dto.ResidentDetailDto;
+import com.jbn.block.maintenance.residence.details.dto.ResidentDetailDto;
 import com.jbn.block.maintenance.water.dto.WaterMeterLogsDTO;
-import com.jbn.block.maintenance.residence.entity.ResidentDetail;
+import com.jbn.block.maintenance.residence.details.entity.ResidentDetail;
 import com.jbn.block.maintenance.water.entity.WaterMeterLogs;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;

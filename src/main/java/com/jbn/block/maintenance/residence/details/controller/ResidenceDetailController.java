@@ -1,7 +1,7 @@
-package com.jbn.block.maintenance.residence.controller;
+package com.jbn.block.maintenance.residence.details.controller;
 
-import com.jbn.block.maintenance.residence.dto.ResidentDetailDto;
-import com.jbn.block.maintenance.residence.service.ResidentDetailService;
+import com.jbn.block.maintenance.residence.details.dto.ResidentDetailDto;
+import com.jbn.block.maintenance.residence.details.service.ResidentDetailService;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -11,11 +11,11 @@ import java.util.List;
 
 @RestController
 @RequestMapping("/resident")
-public class ResidenceController {
+public class ResidenceDetailController {
 
     private final ResidentDetailService residentDetailService;
 
-    public ResidenceController(ResidentDetailService residentDetailService) {
+    public ResidenceDetailController(ResidentDetailService residentDetailService) {
         this.residentDetailService = residentDetailService;
     }
 
