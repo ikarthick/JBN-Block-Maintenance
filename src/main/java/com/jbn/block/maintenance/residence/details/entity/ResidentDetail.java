@@ -17,7 +17,7 @@ public class ResidentDetail implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "RESIDENT_ID")
-    private Long residentId;
+    private Integer residentId;
 
     @Column(name = "FULL_NAME", nullable = false)
     private String fullName;

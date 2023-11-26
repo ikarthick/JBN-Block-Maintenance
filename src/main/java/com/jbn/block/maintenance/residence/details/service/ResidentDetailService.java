@@ -25,8 +25,6 @@ public class ResidentDetailService {
         residentDetailRepository.save(residentDetail);
         return appUtil.mapEntityToDTO(residentDetail);
     }
-
-    //todo - need to fix this endpoint
     public List<ResidentDetailDto> getAllHouseOwners() {
         List<ResidentDetail> residentDetailList = residentDetailRepository.findAll();
         return appUtil.mapEntityListToDTO(residentDetailList);

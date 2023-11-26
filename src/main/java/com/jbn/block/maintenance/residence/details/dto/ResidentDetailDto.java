@@ -9,7 +9,7 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 public class ResidentDetailDto {
 
-    private Long residentId;
+    private Integer residentId;
     private String fullName;
     private Integer age;
     private Long doorNo;

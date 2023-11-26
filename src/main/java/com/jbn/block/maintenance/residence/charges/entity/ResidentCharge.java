@@ -14,7 +14,7 @@ public class ResidentCharge {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "RESIDENT_CHARGE_ID")
-    private Integer residentPaymentTrxId;
+    private Integer residentChargeId;
 
     @Column(name = "EB_CHARGE")
     private Integer ebCharge;
@@ -23,16 +23,16 @@ public class ResidentCharge {
     private Integer maintenanceCharge;
 
     @Column(name = "WATER_CHARGE")
-    private Double waterCharge;
+    private Integer waterCharge;
 
     @Column(name = "RESIDENT_ID")
     private Integer residentId;
 
     @Column(name = "UPDATED_ON")
-    private LocalDateTime updatedOn;
+    private Date updatedOn;
 
     @Column(name = "CREATED_ON")
-    private LocalDateTime createdOn;
+    private Date createdOn;
 
     @Column(name = "RECORD_DATE")
     private Date recordDate;
