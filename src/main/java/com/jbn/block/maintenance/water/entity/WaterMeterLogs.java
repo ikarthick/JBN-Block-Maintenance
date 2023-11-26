@@ -21,6 +21,9 @@ public class WaterMeterLogs {
     @Column(name = "READING_VALUE")
     private Double readingValue;
 
+    @Column(name = "METER_STATUS")
+    private Boolean meterStatus;
+
     @Column(name = "RESIDENT_ID")
     private Integer residentId;
 

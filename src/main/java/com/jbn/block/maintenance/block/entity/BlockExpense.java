@@ -6,12 +6,20 @@ import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
 import java.io.Serializable;
+import java.util.Date;
 
 @NoArgsConstructor
 @AllArgsConstructor
 @Data
 @Entity
 @Table(name = "block_expenses")
+@NamedEntityGraph(
+        name = "blockExpenseGraph",
+        attributeNodes = {
+                @NamedAttributeNode("ebChargeDetailId"),
+                @NamedAttributeNode("waterChargeDetailId")
+        }
+)
 public class BlockExpense implements Serializable {
 
     @Id
@@ -36,4 +44,19 @@ public class BlockExpense implements Serializable {
 
     @Column(name = "CARRY_OVER_BALANCE")
     private Integer carryOverBalance;
+
+    @Column(name = "RECORD_DATE")
+    private Date recordDate;
+
+    @Column(name = "CREATED_ON")
+    private Date createdOn;
+
+    @Column(name = "UPDATED_ON")
+    private Date updatedOn;
+
+    @Column(name = "EB_CHARGE_DETAIL_ID")
+    private Integer ebChargeDetailId;
+
+    @Column(name = "WATER_CHARGE_DETAIL_ID")
+    private Integer waterChargeDetailId;
 }

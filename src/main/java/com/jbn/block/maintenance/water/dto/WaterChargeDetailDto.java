@@ -9,8 +9,6 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 public class WaterChargeDetailDto {
 
-    private Integer waterChargeDetailId;
-    private Integer metroCharge;
+    private Integer metroWaterCharge;
     private Integer privateTankerCharge;
-
 }

@@ -17,16 +17,16 @@ public class WaterChargeDetail {
     private Integer waterChargeDetailId;
 
     @Column(name = "METRO_CHARGE")
-    private Integer metroCharge;
+    private Integer metroWaterCharge;
 
     @Column(name = "PRIVATE_TANKER_CHARGE")
     private Integer privateTankerCharge;
 
     @Column(name = "CREATED_ON")
-    private LocalDateTime createdOn;
+    private Date createdOn;
 
     @Column(name = "UPDATED_ON")
-    private LocalDateTime updatedOn;
+    private Date updatedOn;
 
     @Column(name = "RECORD_DATE")
     private Date recordDate;

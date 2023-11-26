@@ -10,9 +10,8 @@ import java.time.LocalDateTime;
 @AllArgsConstructor
 @NoArgsConstructor
 public class WaterMeterLogsDTO {
-
-    private long waterMeterLogId;
     private Integer residentId;
     private LocalDateTime recordDate;
     private Double readingValue;
+    private Boolean meterStatus;
 }

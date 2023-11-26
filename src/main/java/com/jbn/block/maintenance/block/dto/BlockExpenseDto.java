@@ -10,8 +10,6 @@ import java.io.Serializable;
 @Data
 public class BlockExpenseDto implements Serializable {
 
-    private Long blockExpenseId;
-
     private Integer maintenanceCharge;
 
     private Integer sweeperCharge;
@@ -22,7 +20,4 @@ public class BlockExpenseDto implements Serializable {
 
     private Integer otherExpenses;
 
-    private Integer carryOverBalance;
-
-    // Constructors, getters, and setters if needed
 }

@@ -26,6 +26,7 @@ dependencies {
 	implementation 'javax.validation:validation-api:2.0.1.Final'
 	// https://mvnrepository.com/artifact/org.modelmapper/modelmapper
 	implementation 'org.modelmapper:modelmapper:2.1.1'
+	implementation 'org.springdoc:springdoc-openapi-ui:1.6.5' // Check for the latest version on Maven Central
 	// https://mvnrepository.com/artifact/org.springframework.boot/spring-boot-starter-web
 	implementation 'org.springframework.boot:spring-boot-starter-web'
 	implementation 'io.springfox:springfox-boot-starter:3.0.0'
