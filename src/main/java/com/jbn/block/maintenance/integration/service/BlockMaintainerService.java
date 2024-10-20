@@ -10,12 +10,12 @@ import com.jbn.block.maintenance.eb.entity.EbChargeDetail;
 import com.jbn.block.maintenance.eb.repository.EbChargeDetailRepository;
 import com.jbn.block.maintenance.exception.BlockMaintenanceGenericException;
 import com.jbn.block.maintenance.integration.dto.MonthlyExpenseUploadDto;
+import com.jbn.block.maintenance.residence.charges.service.ResidentChargeService;
 import com.jbn.block.maintenance.water.dto.WaterChargeDetailDto;
 import com.jbn.block.maintenance.water.entity.WaterChargeDetail;
 import com.jbn.block.maintenance.water.repository.WaterChargeDetailRepository;
 import org.springframework.stereotype.Service;
 
-import java.time.LocalDate;
 import java.util.Date;
 import java.util.Optional;
 
@@ -26,14 +26,16 @@ public class BlockMaintainerService {
     private final EbChargeDetailRepository ebChargeDetailRepository;
     private final WaterChargeDetailRepository waterChargeDetailRepository;
     private final AppUtil appUtil;
+    private final ResidentChargeService residentChargeService;
 
     public BlockMaintainerService(BlockExpenseRepository blockExpenseRepository,
                                   EbChargeDetailRepository ebChargeDetailRepository,
-                                  WaterChargeDetailRepository waterChargeDetailRepository, AppUtil appUtil) {
+                                  WaterChargeDetailRepository waterChargeDetailRepository, AppUtil appUtil, ResidentChargeService residentChargeService) {
         this.blockExpenseRepository = blockExpenseRepository;
         this.ebChargeDetailRepository = ebChargeDetailRepository;
         this.waterChargeDetailRepository = waterChargeDetailRepository;
         this.appUtil = appUtil;
+        this.residentChargeService = residentChargeService;
     }
 
     public ApiResponse monthlyExpenseUpload(MonthlyExpenseUploadDto monthlyExpenseUploadDto) {
@@ -66,14 +68,17 @@ public class BlockMaintainerService {
         //update mapping Id
         savedBlockExpense.setEbChargeDetailId(savedEbChargeDetail.getEbChargeDetailId());
         savedBlockExpense.setWaterChargeDetailId(savedWaterChargeDetail.getWaterChargeDetailId());
-        blockExpenseRepository.save(savedBlockExpense);
+        BlockExpense savedBlockExpenseObj = blockExpenseRepository.save(savedBlockExpense);
+
+        //Compute Resident Charges based on Block Expenses
+        residentChargeService.generateResidentMonthlyCharges(savedBlockExpenseObj);
 
         return new ApiResponse<>("Success", "Block Expenses has been recorded successfully", savedBlockExpense);
 
     }
 
     public Integer calculateBlockBalance(BlockExpenseDto blockExpenseDto) {
-        Optional<BlockExpense> previousMonthRecord = blockExpenseRepository.findFirstByOrderByRecordDateDesc();
+        Optional<BlockExpense> previousMonthRecord = blockExpenseRepository.findFirstByIsActiveTrueOrderByRecordDateDesc();
         if (Optional.ofNullable(previousMonthRecord).isPresent()
                 && AppUtil.isInPreviousMonth(previousMonthRecord.get().getRecordDate())
                 && Optional.ofNullable(blockExpenseDto).isPresent()) {

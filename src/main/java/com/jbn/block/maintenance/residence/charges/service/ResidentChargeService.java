@@ -2,7 +2,6 @@ package com.jbn.block.maintenance.residence.charges.service;
 
 import com.jbn.block.maintenance.block.entity.BlockExpense;
 import com.jbn.block.maintenance.block.repository.BlockExpenseRepository;
-import com.jbn.block.maintenance.common.response.ApiResponse;
 import com.jbn.block.maintenance.eb.entity.EbChargeDetail;
 import com.jbn.block.maintenance.eb.repository.EbChargeDetailRepository;
 import com.jbn.block.maintenance.exception.BlockMaintenanceGenericException;
@@ -10,11 +9,10 @@ import com.jbn.block.maintenance.residence.charges.entity.ResidentCharge;
 import com.jbn.block.maintenance.residence.charges.repository.ResidentChargeRepository;
 import com.jbn.block.maintenance.residence.details.entity.ResidentDetail;
 import com.jbn.block.maintenance.residence.details.repository.ResidentDetailRepository;
+import com.jbn.block.maintenance.residence.payment.service.ResidentPaymentService;
 import com.jbn.block.maintenance.water.entity.WaterChargeDetail;
-import com.jbn.block.maintenance.water.entity.WaterMeterLogs;
 import com.jbn.block.maintenance.water.repository.WaterChargeDetailRepository;
 import com.jbn.block.maintenance.water.repository.WaterMeterLogsRepository;
-import io.swagger.models.auth.In;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
@@ -27,14 +25,16 @@ public class ResidentChargeService {
 
     private final ResidentChargeRepository residentChargeRepository;
     private final BlockExpenseRepository blockExpenseRepository;
+    private final ResidentPaymentService residentPaymentService;
     private final EbChargeDetailRepository ebChargeDetailRepository;
     private final WaterChargeDetailRepository waterChargeDetailRepository;
     private final ResidentDetailRepository residentDetailRepository;
     private final WaterMeterLogsRepository waterMeterLogsRepository;
 
-    public ResidentChargeService(ResidentChargeRepository residentChargeRepository, BlockExpenseRepository blockExpenseRepository, EbChargeDetailRepository ebChargeDetailRepository, WaterChargeDetailRepository waterChargeDetailRepository, ResidentDetailRepository residentDetailRepository, WaterMeterLogsRepository waterMeterLogsRepository) {
+    public ResidentChargeService(ResidentChargeRepository residentChargeRepository, BlockExpenseRepository blockExpenseRepository, ResidentPaymentService residentPaymentService, EbChargeDetailRepository ebChargeDetailRepository, WaterChargeDetailRepository waterChargeDetailRepository, ResidentDetailRepository residentDetailRepository, WaterMeterLogsRepository waterMeterLogsRepository) {
         this.residentChargeRepository = residentChargeRepository;
         this.blockExpenseRepository = blockExpenseRepository;
+        this.residentPaymentService = residentPaymentService;
         this.ebChargeDetailRepository = ebChargeDetailRepository;
         this.waterChargeDetailRepository = waterChargeDetailRepository;
         this.residentDetailRepository = residentDetailRepository;
@@ -65,17 +65,23 @@ public class ResidentChargeService {
 
     private ResidentCharge constructAndSaveResidentCharge(Integer totalEBChargesPerResident, Integer residentId, Integer blkMaintenanceCharge, Integer totalWaterConsumptionConsumption) {
         ResidentCharge residentCharge = new ResidentCharge();
-        residentCharge.setEbCharge(totalEBChargesPerResident);
+        residentCharge.setEbCharge(Double.valueOf(totalEBChargesPerResident));
         residentCharge.setResidentId(residentId);
-        residentCharge.setMaintenanceCharge(blkMaintenanceCharge/15);
+        residentCharge.setMaintenanceCharge((double) (blkMaintenanceCharge/15));
         residentCharge.setCreatedOn(new Date());
         residentCharge.setUpdatedOn(new Date());
         residentCharge.setRecordDate(new Date());
         //todo - need to calculate based on water meter log
-        residentCharge.setWaterCharge(totalWaterConsumptionConsumption/15);
+        residentCharge.setWaterCharge((double) (totalWaterConsumptionConsumption/15));
 
         //save residentCharges
-        return residentChargeRepository.save(residentCharge);
+        ResidentCharge savedResidentCharge =  residentChargeRepository.save(residentCharge);
+
+        //Update the payment balance with payable fee
+        Double totalPayable = savedResidentCharge.getMaintenanceCharge() + savedResidentCharge.getEbCharge() + savedResidentCharge.getWaterCharge();
+        residentPaymentService.updateResidentBalance(savedResidentCharge.getResidentId(), totalPayable, "Debit");
+
+        return savedResidentCharge;
     }
 
     private Integer calculateTotalWaterConsumptionPerUnit(BlockExpense blockExpense) {

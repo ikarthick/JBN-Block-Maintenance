@@ -23,10 +23,10 @@ public class ResidentPaymentTrx {
     private Double amountPaid;
 
     @Column(name = "CREATED_ON")
-    private LocalDateTime createdOn;
+    private Date createdOn;
 
     @Column(name = "UPDATED_ON")
-    private LocalDateTime updatedOn;
+    private Date updatedOn;
 
     @Column(name = "RECORD_DATE")
     private Date recordDate;

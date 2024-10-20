@@ -14,5 +14,5 @@ import java.util.Optional;
 public interface BlockExpenseRepository extends JpaRepository<BlockExpense, Integer> {
 
     // Query method to find the latest record based on recordDate
-    Optional<BlockExpense> findFirstByOrderByRecordDateDesc();
+    Optional<BlockExpense> findFirstByIsActiveTrueOrderByRecordDateDesc();
 }

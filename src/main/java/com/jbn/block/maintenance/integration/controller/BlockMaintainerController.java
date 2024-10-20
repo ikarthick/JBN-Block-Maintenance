@@ -50,6 +50,7 @@ public class BlockMaintainerController {
         Map<String, String> placeholders = new HashMap<>();
         placeholders.put("{Month}", "DEC");
         placeholders.put("{Year}", "2023");
+        placeholders.put("{CR}", "40000000000");
 
         try {
             // Read the content of the input HTML file

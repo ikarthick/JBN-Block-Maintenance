@@ -17,13 +17,13 @@ public class ResidentCharge {
     private Integer residentChargeId;
 
     @Column(name = "EB_CHARGE")
-    private Integer ebCharge;
+    private Double ebCharge;
 
     @Column(name = "MAINTENANCE_CHARGE")
-    private Integer maintenanceCharge;
+    private Double maintenanceCharge;
 
     @Column(name = "WATER_CHARGE")
-    private Integer waterCharge;
+    private Double waterCharge;
 
     @Column(name = "RESIDENT_ID")
     private Integer residentId;

@@ -59,4 +59,7 @@ public class BlockExpense implements Serializable {
 
     @Column(name = "WATER_CHARGE_DETAIL_ID")
     private Integer waterChargeDetailId;
+
+    @Column(name = "IS_ACTIVE")
+    private Boolean isActive;
 }
